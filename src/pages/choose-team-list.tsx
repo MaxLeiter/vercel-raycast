@@ -27,7 +27,7 @@ const ChooseTeamList = ({ teams: defaultTeams, setTeam, selectedTeam: defaultSel
 
     const SelfIcon = selectedTeamId ? { source: Icon.Person } : { source: Icon.Checkmark, tintColor: Color.Green }
     const Self = <List.Item title='Personal' key={'personal'} icon={SelfIcon} actions={<ActionPanel><ActionPanel.Item
-        title="Switch team"
+        title="Switch Team"
         icon={SelfIcon}
         onAction={() => {
             setLocalStorageItem("team", "")
@@ -41,7 +41,7 @@ const ChooseTeamList = ({ teams: defaultTeams, setTeam, selectedTeam: defaultSel
             key={team.slug}
             icon={icon}
             actions={<ActionPanel><ActionPanel.Item
-                title="Switch team"
+                title="Switch Team"
                 icon={icon}
                 onAction={() => {
                     setLocalStorageItem("team", team.id)

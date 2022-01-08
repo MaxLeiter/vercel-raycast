@@ -107,7 +107,7 @@ function Main(): JSX.Element {
   }
 
   return (
-    <List navigationTitle="Vercel" isLoading={!projects || !teams || !user}>
+    <List isLoading={!projects || !teams || !user}>
       {/* {recentProjects && <RecentProjectListSection projectAndTeamIds={projectAndTeamIds} updateProject={updateProjectWrapper} teams={teams} />} */}
       {projects && <ProjectListSection username={user?.username} projects={projects} updateProject={updateProjectWrapper} selectedTeam={selectedTeam} />}
       {teams && <TeamListSection teams={teams} selectedTeam={selectedTeam} setTeam={setSelectedTeam} />}

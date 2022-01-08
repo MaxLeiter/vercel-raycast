@@ -60,7 +60,7 @@ const EnvironmentVariables = ({ project, team }: Props) => {
     return (
         <List navigationTitle={`Environment variables for ${project.name}`} isLoading={!vars}>
             <List.Item
-                title="New environment variable"
+                title="New Environment Variable"
                 icon={Icon.Plus}
                 actions={
                     <ActionPanel>

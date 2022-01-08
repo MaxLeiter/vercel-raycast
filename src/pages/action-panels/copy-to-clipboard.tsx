@@ -8,7 +8,7 @@ const copyToClipboard = async (text: string) => {
 const CopyToClipboardActionPanel = ({ text }: { text?: string }) => {
     return (<ActionPanel>
         <ActionPanel.Item
-            title="Copy to clipboard"
+            title="Copy to Clipboard"
             onAction={() => copyToClipboard(text ?? '')}
             icon={Icon.Document}
         />
