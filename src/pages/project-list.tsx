@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Deployment, Project as ProjectType, Team } from "../types"
 import { fetchDeploymentsForProject } from "../vercel"
 import CopyToClipboardActionPanel from "./action-panels/copy-to-clipboard"
-import DeploymentList from "./deployment-list"
+import DeploymentList from "./deployments-list"
 import EnvironmentVariables from "./environment-variables-list"
 import EditPreferences from "./forms/edit-preferences"
 
@@ -18,7 +18,6 @@ const Project = ({ project, team, username, updateProject }: Props) => {
     const { push } = useNavigation()
     const [deployments, setDeployments] = useState<Deployment[]>()
     const [latestDeployment, setLatestDeployment] = useState<Deployment>()
-
     const name = team ? team.slug : username
     useEffect(() => {
         fetchDeploymentsForProject(project, team?.id).then((deployments) => {

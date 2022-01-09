@@ -5,6 +5,8 @@ import {
   showToast,
   ToastStyle,
   getLocalStorageItem,
+  Detail,
+  setLocalStorageItem,
 } from '@raycast/api'
 import { useEffect, useState } from 'react'
 import useInterval from './use-interval'
@@ -50,7 +52,12 @@ function Main(): JSX.Element {
       const storedTeamId = await getLocalStorageItem("team")
       if (storedTeamId) {
         const team = teams?.find(team => team.id === storedTeamId)
-        setSelectedTeam(team)
+        if (team) {
+          setSelectedTeam(team)
+        } else {
+          // If the stored team is no longer found, clear the localStorage
+          await setLocalStorageItem("team", '')
+        }
       }
     }
 

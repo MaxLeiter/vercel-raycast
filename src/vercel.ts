@@ -2,7 +2,7 @@ import { preferences, showToast, ToastStyle } from '@raycast/api'
 import fetch, { Headers } from 'node-fetch'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse } from './types'
+import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse, Build } from './types'
 
 export const token = preferences.token?.value
 const headers = new Headers({
@@ -178,6 +178,21 @@ export async function fetchDeploymentsForProject(project: Project, teamId?: stri
     }
 }
 
+export async function fetchDeploymentBuildsByDeploymentId(deploymentId: string) {
+    try {
+        const response = await fetch(apiURL + `v11/deployments/${deploymentId}/builds`, {
+            method: 'get',
+            headers: headers,
+        })
+        const json = await response.json() as { builds: Build[] }
+        return json.builds
+    } catch (err) {
+        console.error(err)
+        showToast(ToastStyle.Failure, 'Failed to fetch deployment builds')
+        throw new Error('Failed to fetch deployment builds')
+    }
+}
+
 // Fetch project environment variable
 export async function fetchEnvironmentVariables(
     projectId: string,
@@ -240,7 +255,6 @@ export async function createEnvironmentVariable(projectId: string, envVar: Parti
             body: JSON.stringify(envVar),
         })
         const json = await response.json() as CreateEnvironmentVariableResponse
-        console.log(json)
         return json
     } catch (e) {
         console.error(e)

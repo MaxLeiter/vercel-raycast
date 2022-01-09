@@ -910,10 +910,72 @@ export interface User {
     avatar: string | null
 }
 
+// https://vercel.com/docs/rest-api#endpoints/deployments/list-deployment-builds
+type Build = {
+        /** The unique identifier of the Build */
+        id: string
+        /** The unique identifier of the deployment */
+        deploymentId: string
+        /** The entrypoint of the deployment */
+        entrypoint: string
+        /** The state of the deployment depending on the process of deploying, or if it is ready or in an error state */
+        readyState:
+        | "INITIALIZING"
+        | "BUILDING"
+        | "UPLOADING"
+        | "DEPLOYING"
+        | "READY"
+        | "ARCHIVED"
+        | "ERROR"
+        | "QUEUED"
+        | "CANCELED"
+        /** The time at which the Build state was last modified */
+        readyStateAt?: number
+        /** The time at which the Build was scheduled to be built */
+        scheduledAt?: number | null
+        /** The time at which the Build was created */
+        createdAt?: number
+        /** The time at which the Build was deployed */
+        deployedAt?: number
+        /** The region where the Build was first created */
+        createdIn?: string
+        /** The Runtime the Build used to generate the output */
+        use?: string
+        /** An object that contains the Build's configuration */
+        config?: {
+            distDir?: string
+            forceBuildIn?: string
+            reuseWorkPathFrom?: string
+            zeroConfig?: boolean
+        }
+        /** A list of outputs for the Build that can be either Serverless Functions or static files */
+        output: {
+            /** The type of the output */
+            type?: "lambda" | "file"
+            /** The absolute path of the file or Serverless Function */
+            path: string
+            /** The SHA1 of the file */
+            digest: string
+            /** The POSIX file permissions */
+            mode: number
+            /** The size of the file in bytes */
+            size?: number
+            /** If the output is a Serverless Function, an object containing the name, location and memory size of the function */
+            lambda?: {
+                functionName: string
+                deployedTo: string[]
+                memorySize?: number
+                timeout?: number
+                layers?: string[]
+            }
+        }[]
+}
+
+
 type Error = {
     "error": {
-      "code": string,
-      "message": string
+        "code": string,
+        "message": string
     }
 }
 

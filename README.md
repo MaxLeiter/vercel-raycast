@@ -11,7 +11,7 @@ Vercel for Raycast.
 
 ## Roadmap (in no particular order):
 - Recents list
-- Deployment notifications? May be out-of-scope.
+- Deployment notifications? May be out-of-scope / impossible.
 - Ability to ping and see logs for serverless functions 
 
 ## Contributing

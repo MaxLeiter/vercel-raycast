@@ -1,12 +1,15 @@
-import { Icon, Color, List, ActionPanel, OpenInBrowserAction } from "@raycast/api"
+import { Icon, Color, List, ActionPanel, OpenInBrowserAction, useNavigation } from "@raycast/api"
 import dayjs from "dayjs"
 import { Deployment, DeploymentState } from "../types"
+import DeploymentBuildList from "./deployment-build-list"
 
 type Props = {
     deployments: Deployment[]
 }
 
-const DeploymentList = ({ deployments }: Props) => {
+const DeploymentsList = ({ deployments }: Props) => {
+    const { push } = useNavigation()
+
     const StateIcon = (state?: DeploymentState) => {
         switch (state) {
             case "READY":
@@ -42,6 +45,13 @@ const DeploymentList = ({ deployments }: Props) => {
                 keywords={[deployment.name, getCommitMessage(deployment) || '']}
                 actions={
                     <ActionPanel>
+                        <ActionPanel.Item 
+                            title="Inspect Most Recent Build"
+                            icon={Icon.Binoculars}
+                            onAction={() => {
+                                push(< DeploymentBuildList deployment={deployment}/>)
+                            }}
+                        />
                         <OpenInBrowserAction title={`Open on Vercel`} url={`https://${deployment.url}`} icon={Icon.Link} />
                     </ActionPanel>
                 } />)}
@@ -49,4 +59,4 @@ const DeploymentList = ({ deployments }: Props) => {
     )
 }
 
-export default DeploymentList
+export default DeploymentsList
