@@ -31,7 +31,7 @@ const Project = ({ project, team, username, updateProject }: Props) => {
 
     return (<List navigationTitle={project.name} isLoading={!deployments}>
         <List.Section title={"Navigation"}>
-            <List.Item title={`Open in browser`}
+            <List.Item title={`Open in Browser`}
                 icon={Icon.ArrowRight}
                 actions={
                     <ActionPanel>
@@ -39,21 +39,21 @@ const Project = ({ project, team, username, updateProject }: Props) => {
                     </ActionPanel>
                 }
             />
-            <List.Item title={`Open domains`} icon={Icon.ArrowRight}
+            <List.Item title={`Open Domains`} icon={Icon.ArrowRight}
                 actions={
                     <ActionPanel>
                         <OpenInBrowserAction url={`https://vercel.com/${name}/${project.name}/settings/domains`} />
                     </ActionPanel>
                 }
             />
-            {project.analytics && <List.Item title={`Open analytics`} icon={Icon.ArrowRight}
+            {project.analytics && <List.Item title={`Open Analytics`} icon={Icon.ArrowRight}
                 actions={
                     <ActionPanel>
                         <OpenInBrowserAction url={`https://vercel.com/${name}/${project.name}/analytics`} />
                     </ActionPanel>
                 }
             />}
-            <List.Item title={`Open logs`} icon={Icon.ArrowRight}
+            <List.Item title={`Open Logs`} icon={Icon.ArrowRight}
                 actions={
                     <ActionPanel>
                         <OpenInBrowserAction url={`https://vercel.com/${project.accountId}/${project.name}/logs`} />
@@ -75,7 +75,7 @@ const Project = ({ project, team, username, updateProject }: Props) => {
             />
 
             <List.Item title={`Environment Variables`} icon={Icon.List}
-                subtitle={project.env?.length ? `${project.env.length} variables` : "No variables"}
+                subtitle={project.env?.length ? `${project.env.length} variables` : "No Variables"}
                 actions={
                     <ActionPanel>
                         <ActionPanel.Item
@@ -87,7 +87,7 @@ const Project = ({ project, team, username, updateProject }: Props) => {
             />
         </List.Section>
         <List.Section title={`Deployments`}>
-            {latestDeployment && <List.Item title={`Visit most recent deployment`}
+            {latestDeployment && <List.Item title={`Visit Most Recent Deployment`}
                 icon={Icon.Link}
                 subtitle={latestDeployment.createdAt ? dayjs(latestDeployment.createdAt).fromNow() : ''}
                 accessoryTitle={latestDeployment.state?.toLowerCase() || latestDeployment.readyState?.toLowerCase()}
@@ -95,13 +95,13 @@ const Project = ({ project, team, username, updateProject }: Props) => {
                     <OpenInBrowserAction url={`https://${latestDeployment.url}`} />
                 </ActionPanel>}
             />}
-            {deployments && deployments.length ? <List.Item title="Search deployments..."
+            {deployments && deployments.length ? <List.Item title="Search Deployments..."
                 icon={Icon.MagnifyingGlass}
                 subtitle={`${deployments?.length} deployments loaded`}
                 actions={
                     <ActionPanel>
                         <ActionPanel.Item
-                            title="Search deployments..."
+                            title="Search Deployments..."
                             icon={{ source: Icon.MagnifyingGlass }}
                             onAction={() => {
                                 push(<DeploymentList deployments={deployments} />)
@@ -109,9 +109,9 @@ const Project = ({ project, team, username, updateProject }: Props) => {
                         />
                     </ActionPanel>
                 }
-            /> : <List.Item title="No deployments" />}
+            /> : <List.Item title="No Deployments" />}
         </List.Section>
-        <List.Section title={`Project information`}>
+        <List.Section title={`Project Information`}>
             <List.Item icon={Icon.Clipboard} title={`Project ID`} subtitle={project.id} actions={<CopyToClipboardActionPanel text={project.id} />} />
         </List.Section>
     </List>

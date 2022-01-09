@@ -909,3 +909,14 @@ export interface User {
     /** SHA1 hash of the avatar for the User account. Can be used in conjuction with the ... endpoint to retrieve the avatar image. */
     avatar: string | null
 }
+
+type Error = {
+    "error": {
+      "code": string,
+      "message": string
+    }
+}
+
+type Response<T> = Error & T
+
+export type CreateEnvironmentVariableResponse = Response<Environment>

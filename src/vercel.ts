@@ -2,7 +2,7 @@ import { preferences, showToast, ToastStyle } from '@raycast/api'
 import fetch, { Headers } from 'node-fetch'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import type { Team, Deployment, Project, Environment, User } from './types'
+import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse } from './types'
 
 export const token = preferences.token?.value
 const headers = new Headers({
@@ -232,14 +232,14 @@ export async function updateProject(projectId: string, project: Partial<Project>
 }
 
 // TODO: use Omit<>
-export async function createEnvironmentVariable(projectId: string, envVar: Partial<Environment>, teamId?: string) {
+export async function createEnvironmentVariable(projectId: string, envVar: Partial<Environment>, teamId?: string): Promise<CreateEnvironmentVariableResponse> {
     try {
         const response = await fetch(apiURL + `v8/projects/${projectId}/env?teamId=${teamId ? teamId : ''}`, {
             method: 'post',
             headers: headers,
             body: JSON.stringify(envVar),
         })
-        const json = await response.json() as Environment
+        const json = await response.json() as CreateEnvironmentVariableResponse
         console.log(json)
         return json
     } catch (e) {
