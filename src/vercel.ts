@@ -138,7 +138,6 @@ export async function deleteEnvironmentVariableById(
 
 export async function fetchProjectById(projectId: string, teamId?: string) {
     try {
-        console.log(`${apiURL}v8/projects/${projectId}?teamId=${teamId ?? ''}`)
         const response = await fetch(
             apiURL + `v8/projects/${projectId}`,
             {

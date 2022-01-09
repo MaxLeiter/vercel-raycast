@@ -1,4 +1,4 @@
-import { Icon, Color, List, ActionPanel, OpenInBrowserAction } from "@raycast/api"
+import { Icon, Color, List } from "@raycast/api"
 import dayjs from "dayjs"
 import { useEffect, useState } from "react"
 import { Build, Deployment } from "../types"
@@ -14,7 +14,6 @@ const DeploymentBuildList = ({ deployment }: Props) => {
     useEffect(() => {
         async function fetchBuilds() {
             const fetchedBuilds = await fetchDeploymentBuildsByDeploymentId(deployment.uid)
-           console.log(fetchedBuilds[0])
             setMostRecentBuild(fetchedBuilds ? fetchedBuilds[0] : undefined)
         }
         fetchBuilds()
