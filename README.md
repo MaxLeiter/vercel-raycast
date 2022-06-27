@@ -1,4 +1,4 @@
-# vc-raycast
+# Vercel Project Explorer
 Vercel for Raycast.
 
 ## Setup:
