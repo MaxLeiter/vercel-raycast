@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse, Build } from './types'
 
-export const token = preferences.token?.value
+export const token = preferences.accountToken?.value
 const headers = new Headers({
     Authorization: 'Bearer ' + token,
 })
@@ -45,7 +45,7 @@ export async function fetchTeams(): Promise<Team[]> {
 
 /*
 * Fetch all projects for the user and optional teams
-*/ 
+*/
 export async function fetchProjects(
     username: string,
     teams?: Team[]

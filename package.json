@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "vercel",
-  "title": "Vercel",
-  "description": "Vercel client",
+  "name": "vercel-project-explorer",
+  "title": "Vercel Project Explorer",
+  "description": "An extension for viewing and modifying Vercel projects and deployments.",
   "icon": "icon.png",
   "author": "MaxLeiter",
   "license": "MIT",
@@ -15,11 +15,11 @@
       "subtitle": "Vercel",
       "preferences": [
         {
-          "name": "token",
+          "name": "accountToken",
           "type": "password",
           "required": true,
-          "title": "Token",
-          "description": "Account Token",
+          "title": "Account Token",
+          "description": "Your Vercel account token",
           "link": "https://vercel.com/account/tokens"
         }
       ]

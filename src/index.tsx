@@ -5,7 +5,6 @@ import {
   showToast,
   ToastStyle,
   getLocalStorageItem,
-  Detail,
   setLocalStorageItem,
 } from '@raycast/api'
 import { useEffect, useState } from 'react'
@@ -27,7 +26,7 @@ import SelectedTeamSection from './pages/home/selected-team-section'
 render(<Main />)
 
 function Main(): JSX.Element {
-  const token = String(preferences.token?.value)
+  const token = String(preferences.accountToken?.value)
   if (token.length !== 24) {
     showToast(ToastStyle.Failure, 'Invalid token detected')
     throw new Error('Invalid token length detected')
