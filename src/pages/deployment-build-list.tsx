@@ -1,73 +1,77 @@
-import { Icon, Color, List } from "@raycast/api"
-import dayjs from "dayjs"
-import { useEffect, useState } from "react"
-import { Build, Deployment } from "../types"
-import { fetchDeploymentBuildsByDeploymentId } from "../vercel"
+import { Icon, Color, List } from "@raycast/api";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { Build, Deployment } from "../types";
+import { fetchDeploymentBuildsByDeploymentId } from "../vercel";
 
 type Props = {
-    deployment: Deployment
-}
+  deployment: Deployment;
+};
 
 const DeploymentBuildList = ({ deployment }: Props) => {
-    const [build, setMostRecentBuild] = useState<Build>()
+  const [build, setMostRecentBuild] = useState<Build>();
 
-    useEffect(() => {
-        async function fetchBuilds() {
-            const fetchedBuilds = await fetchDeploymentBuildsByDeploymentId(deployment.uid)
-            setMostRecentBuild(fetchedBuilds ? fetchedBuilds[0] : undefined)
-        }
-        fetchBuilds()
-    }, [deployment])
-
-
-    const getCommitMessage = (deployment: Deployment) => {
-        // TODO: determine others
-        if (deployment.meta.githubCommitMessage) {
-            return deployment.meta.githubCommitMessage
-        }
-        return "No commit message"
+  useEffect(() => {
+    async function fetchBuilds() {
+      const fetchedBuilds = await fetchDeploymentBuildsByDeploymentId(deployment.uid);
+      setMostRecentBuild(fetchedBuilds ? fetchedBuilds[0] : undefined);
     }
+    fetchBuilds();
+  }, [deployment]);
 
-    const getReadyStateIcon = () => {
-        switch (build?.readyState) {
-            case "READY":
-                return { source: Icon.Dot, tintColor: Color.Green }
-            case "BUILDING":
-            case "INITIALIZING":
-                return { source: Icon.Dot, tintColor: Color.Blue }
-            case "CANCELED":
-                return { source: Icon.Dot, tintColor: Color.PrimaryText }
-            case "ERROR":
-                return { source: Icon.ExclamationMark, tintColor: Color.Red }
-            default:
-                return Icon.QuestionMark
-        }
+  const getCommitMessage = (deployment: Deployment) => {
+    // TODO: determine others
+    if (deployment.meta.githubCommitMessage) {
+      return deployment.meta.githubCommitMessage;
     }
-    const listItems = () => {
-        if (!build) return
-        const items: React.ReactNode[] = []
-        items.push(<List.Item title="State" subtitle={build.readyState} icon={getReadyStateIcon()} />)
-        items.push(<List.Section title="Files" subtitle={build.output.length.toString()} />)
-        build.output.forEach((e) => {
-            items.push(<List.Item
-                key={e.digest}
-                keywords={[e.type ?? '']}
-                title={e.path}
-                subtitle={`${e.type} ${e.lambda ?  `— ${e.lambda.deployedTo.join(", ")}` : ''}`}
-                icon={e.lambda ? Icon.Globe : Icon.Document} 
-                />
-                
-            )
-        })
+    return "No commit message";
+  };
 
-        return items
+  const getReadyStateIcon = () => {
+    switch (build?.readyState) {
+      case "READY":
+        return { source: Icon.Dot, tintColor: Color.Green };
+      case "BUILDING":
+      case "INITIALIZING":
+        return { source: Icon.Dot, tintColor: Color.Blue };
+      case "CANCELED":
+        return { source: Icon.Dot, tintColor: Color.PrimaryText };
+      case "ERROR":
+        return { source: Icon.ExclamationMark, tintColor: Color.Red };
+      default:
+        return Icon.QuestionMark;
     }
+  };
+  const listItems = () => {
+    if (!build) return;
+    const items: React.ReactNode[] = [];
+    items.push(<List.Item title="State" subtitle={build.readyState} icon={getReadyStateIcon()} />);
+    items.push(<List.Section title="Files" subtitle={build.output.length.toString()} />);
+    build.output.forEach((e) => {
+      items.push(
+        <List.Item
+          key={e.digest}
+          keywords={[e.type ?? ""]}
+          title={e.path}
+          subtitle={`${e.type} ${e.lambda ? `— ${e.lambda.deployedTo.join(", ")}` : ""}`}
+          icon={e.lambda ? Icon.Globe : Icon.Document}
+        />
+      );
+    });
 
-    return (
-        <List navigationTitle={`${getCommitMessage(deployment)} — ${deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ''}`} isLoading={!build}>
-            {!build && <List.Item title="No builds found" />}
-            {build && listItems()?.map((item) => item)}
-            {/* {deployments.map((deployment) => <List.Item key={deployment.uid} title={`${getCommitMessage(deployment)} — ${deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ''}`}
+    return items;
+  };
+
+  return (
+    <List
+      navigationTitle={`${getCommitMessage(deployment)} — ${
+        deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ""
+      }`}
+      isLoading={!build}
+    >
+      {!build && <List.Item title="No builds found" />}
+      {build && listItems()?.map((item) => item)}
+      {/* {deployments.map((deployment) => <List.Item key={deployment.uid} title={`${getCommitMessage(deployment)} — ${deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ''}`}
                 icon={StateIcon(deployment.readyState ? deployment.readyState : deployment.state)}
                 subtitle={deployment.url}
                 accessoryTitle={deployment.readyState ? deployment.readyState.toLowerCase() : deployment.state?.toLowerCase()}
@@ -77,8 +81,8 @@ const DeploymentBuildList = ({ deployment }: Props) => {
                         <OpenInBrowserAction title={`Open on Vercel`} url={`https://${deployment.url}`} icon={Icon.Link} />
                     </ActionPanel>
                 } />)} */}
-        </List >
-    )
-}
+    </List>
+  );
+};
 
-export default DeploymentBuildList
+export default DeploymentBuildList;

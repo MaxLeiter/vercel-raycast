@@ -1,18 +1,19 @@
-import { ActionPanel, copyTextToClipboard, Icon, showToast, ToastStyle } from "@raycast/api"
+import { ActionPanel, Icon, showToast, Action, Clipboard, Toast } from "@raycast/api";
 
 const copyToClipboard = async (text: string) => {
-    await copyTextToClipboard(text)
-    showToast(ToastStyle.Success, "Copied to clipboard")
-}
+  await Clipboard.copy(text);
+  showToast({
+    style: Toast.Style.Success,
+    title: "Copied to clipboard",
+  });
+};
 
 const CopyToClipboardActionPanel = ({ text }: { text?: string }) => {
-    return (<ActionPanel>
-        <ActionPanel.Item
-            title="Copy to Clipboard"
-            onAction={() => copyToClipboard(text ?? '')}
-            icon={Icon.Document}
-        />
-    </ActionPanel>)
-}
+  return (
+    <ActionPanel>
+      <Action title="Copy to Clipboard" onAction={() => copyToClipboard(text ?? "")} icon={Icon.Document} />
+    </ActionPanel>
+  );
+};
 
-export default CopyToClipboardActionPanel
+export default CopyToClipboardActionPanel;

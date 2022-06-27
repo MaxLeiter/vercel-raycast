@@ -1,33 +1,36 @@
-import { Icon, List } from "@raycast/api"
-import dayjs from "dayjs"
-import { Team } from "../../types"
-import CopyToClipboardActionPanel from "../action-panels/copy-to-clipboard"
+import { Icon, List } from "@raycast/api";
+import dayjs from "dayjs";
+import { Team } from "../../types";
+import CopyToClipboardActionPanel from "../action-panels/copy-to-clipboard";
 
 type Props = {
-    team: Team
-}
+  team: Team;
+};
 
 const SelectedTeamSection = ({ team }: Props) => {
+  const { description, createdAt, id, membership, name, resourceConfig } = team;
 
-    const { description, createdAt, id, membership, name, resourceConfig } = team
-
-    const ListItem = ({ title, subtitle }: { title: string, subtitle: string }) => {
-        return (
-            <List.Item title={title} subtitle={subtitle} icon={Icon.Clipboard}
-                actions={<CopyToClipboardActionPanel text={subtitle} /> } />
-        )
-    }
-
+  const ListItem = ({ title, subtitle }: { title: string; subtitle: string }) => {
     return (
-        <List.Section title={`Team information`}>
-            {description && <ListItem title="Description" subtitle={description} />}
-            <ListItem title="Name" subtitle={name} />
-            <ListItem title="ID" subtitle={id} />
-            <ListItem title="Created" subtitle={dayjs(createdAt).fromNow()} />
-            {membership && <ListItem title="Your role" subtitle={membership.role} />}
-            {resourceConfig && <ListItem title="Concurrent builds " subtitle={resourceConfig.concurrentBuilds.toString()} />}
-        </List.Section>
-    )
-}
+      <List.Item
+        title={title}
+        subtitle={subtitle}
+        icon={Icon.Clipboard}
+        actions={<CopyToClipboardActionPanel text={subtitle} />}
+      />
+    );
+  };
 
-export default SelectedTeamSection
+  return (
+    <List.Section title={`Team information`}>
+      {description && <List.Item title="Description" subtitle={description} />}
+      <List.Item title="Name" subtitle={name} />
+      <List.Item title="ID" subtitle={id} />
+      <List.Item title="Created" subtitle={dayjs(createdAt).fromNow()} />
+      {membership && <List.Item title="Your role" subtitle={membership.role} />}
+      {resourceConfig && <List.Item title="Concurrent builds " subtitle={resourceConfig.concurrentBuilds.toString()} />}
+    </List.Section>
+  );
+};
+
+export default SelectedTeamSection;
