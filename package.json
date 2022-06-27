@@ -10,8 +10,8 @@
   "commands": [
     {
       "name": "index",
-      "title": "vc",
-      "description": "Interact with the Vercel API",
+      "title": "Explore Vercel Projects",
+      "description": "Interact with your Vercel projects and deployments",
       "mode": "view",
       "subtitle": "Vercel"
     }
