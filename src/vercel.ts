@@ -1,7 +1,5 @@
 import { getPreferenceValues, showToast, Toast } from "@raycast/api";
 import fetch, { Headers } from "node-fetch";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse, Build } from "./types";
 
 export const token = getPreferenceValues().accessToken;
@@ -66,7 +64,6 @@ export async function fetchProjects(username: string, teams?: Team[]): Promise<P
 }
 
 async function _rawFetchProjects(team?: Team, limit = 100): Promise<Project[]> {
-  dayjs.extend(relativeTime);
   try {
     const projects: Project[] = [];
     const query = new URLSearchParams({
@@ -200,7 +197,6 @@ export async function fetchEnvironmentVariables(projectId: string, teamId?: stri
 
 // Raw function for fetching project environment variable
 async function _rawFetchProjectEnvironmentVariables(projectId: string, teamId?: string): Promise<Environment[]> {
-  dayjs.extend(relativeTime);
   try {
     const response = await fetch(apiURL + `v8/projects/${projectId}/env?teamId=${teamId ?? ""}`, {
       method: "get",
@@ -268,7 +264,6 @@ async function _rawUpdateProjectEnvironmentVariable(
   envId: string,
   envVar: Partial<Environment>
 ): Promise<Environment> {
-  dayjs.extend(relativeTime);
   try {
     const response = await fetch(apiURL + `v8/projects/${projectId}/env/${envId}`, {
       method: "patch",

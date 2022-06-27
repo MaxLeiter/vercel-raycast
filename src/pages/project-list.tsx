@@ -1,6 +1,6 @@
 import { ActionPanel, Icon, List, useNavigation, Action } from "@raycast/api";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import { fromNow } from "../time";
 import { Deployment, Project as ProjectType, Team } from "../types";
 import { fetchDeploymentsForProject } from "../vercel";
 import CopyToClipboardActionPanel from "./action-panels/copy-to-clipboard";
@@ -99,7 +99,7 @@ const Project = ({ project, team, username, updateProject }: Props) => {
           <List.Item
             title={`Visit Most Recent Deployment`}
             icon={Icon.Link}
-            subtitle={latestDeployment.createdAt ? dayjs(latestDeployment.createdAt).fromNow() : ""}
+            subtitle={latestDeployment.createdAt ? fromNow(latestDeployment.createdAt) : ""}
             actions={
               <ActionPanel>
                 <Action.OpenInBrowser url={`https://${latestDeployment.url}`} />
@@ -138,6 +138,7 @@ const Project = ({ project, team, username, updateProject }: Props) => {
           icon={Icon.Clipboard}
           title={`Project ID`}
           subtitle={project.id}
+          id={project.id}
           actions={<CopyToClipboardActionPanel text={project.id} />}
         />
       </List.Section>

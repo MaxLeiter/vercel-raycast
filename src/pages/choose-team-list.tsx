@@ -28,8 +28,8 @@ const ChooseTeamList = ({ teams: defaultTeams, setTeam, selectedTeam: defaultSel
   const SelfIcon = selectedTeamId ? { source: Icon.Person } : { source: Icon.Checkmark, tintColor: Color.Green };
   const Self = (
     <List.Item
+      id="self"
       title="Personal"
-      key={"personal"}
       icon={SelfIcon}
       actions={
         <ActionPanel>
@@ -54,8 +54,8 @@ const ChooseTeamList = ({ teams: defaultTeams, setTeam, selectedTeam: defaultSel
           : { source: Icon.Globe };
       return (
         <List.Item
+          id={team.id}
           title={team.name}
-          key={team.slug}
           icon={icon}
           actions={
             <ActionPanel>

@@ -1,5 +1,5 @@
 import { Icon, List } from "@raycast/api";
-import dayjs from "dayjs";
+import { fromNow } from "../../time";
 import { Team } from "../../types";
 import CopyToClipboardActionPanel from "../action-panels/copy-to-clipboard";
 
@@ -26,7 +26,7 @@ const SelectedTeamSection = ({ team }: Props) => {
       {description && <List.Item title="Description" subtitle={description} />}
       <List.Item title="Name" subtitle={name} />
       <List.Item title="ID" subtitle={id} />
-      <List.Item title="Created" subtitle={dayjs(createdAt).fromNow()} />
+      <List.Item title="Created" subtitle={fromNow(createdAt)} />
       {membership && <List.Item title="Your role" subtitle={membership.role} />}
       {resourceConfig && <List.Item title="Concurrent builds " subtitle={resourceConfig.concurrentBuilds.toString()} />}
     </List.Section>

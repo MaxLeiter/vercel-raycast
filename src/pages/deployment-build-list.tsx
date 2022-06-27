@@ -1,6 +1,6 @@
 import { Icon, Color, List } from "@raycast/api";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import { fromNow } from "../time";
 import { Build, Deployment } from "../types";
 import { fetchDeploymentBuildsByDeploymentId } from "../vercel";
 
@@ -50,7 +50,6 @@ const DeploymentBuildList = ({ deployment }: Props) => {
     build.output.forEach((e) => {
       items.push(
         <List.Item
-          key={e.digest}
           keywords={[e.type ?? ""]}
           title={e.path}
           subtitle={`${e.type} ${e.lambda ? `— ${e.lambda.deployedTo.join(", ")}` : ""}`}
@@ -64,14 +63,12 @@ const DeploymentBuildList = ({ deployment }: Props) => {
 
   return (
     <List
-      navigationTitle={`${getCommitMessage(deployment)} — ${
-        deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ""
-      }`}
+      navigationTitle={`${getCommitMessage(deployment)} — ${deployment.createdAt ? fromNow(deployment.createdAt) : ""}`}
       isLoading={!build}
     >
       {!build && <List.Item title="No builds found" />}
       {build && listItems()?.map((item) => item)}
-      {/* {deployments.map((deployment) => <List.Item key={deployment.uid} title={`${getCommitMessage(deployment)} — ${deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ''}`}
+      {/* {deployments.map((deployment) => <List.Item title={`${getCommitMessage(deployment)} — ${deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ''}`}
                 icon={StateIcon(deployment.readyState ? deployment.readyState : deployment.state)}
                 subtitle={deployment.url}
                 accessoryTitle={deployment.readyState ? deployment.readyState.toLowerCase() : deployment.state?.toLowerCase()}

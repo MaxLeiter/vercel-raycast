@@ -1,5 +1,5 @@
 import { Icon, Color, List, ActionPanel, useNavigation, Action } from "@raycast/api";
-import dayjs from "dayjs";
+import { fromNow } from "../time";
 import { Deployment, DeploymentState } from "../types";
 import DeploymentBuildList from "./deployment-build-list";
 
@@ -40,10 +40,7 @@ const DeploymentsList = ({ deployments }: Props) => {
     <List navigationTitle="Results" isLoading={deployments.length === 0}>
       {deployments.map((deployment) => (
         <List.Item
-          key={deployment.uid}
-          title={`${getCommitMessage(deployment)} — ${
-            deployment.createdAt ? dayjs(deployment.createdAt).fromNow() : ""
-          }`}
+          title={`${getCommitMessage(deployment)} — ${deployment.createdAt ? fromNow(deployment.createdAt) : ""}`}
           icon={StateIcon(deployment.readyState ? deployment.readyState : deployment.state)}
           subtitle={deployment.url}
           keywords={[deployment.name, getCommitMessage(deployment) || ""]}

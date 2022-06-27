@@ -2,7 +2,7 @@ import { ActionPanel, Icon, List, useNavigation, Action, LocalStorage } from "@r
 import ProjectComponent from "./project-list";
 
 import { Project, Team } from "../types";
-import dayjs from "dayjs";
+import { fromNow } from "../time";
 
 type Props = {
   projects?: Project[];
@@ -18,7 +18,7 @@ const ProjectList = ({ projects, username, selectedTeam: team, updateProject }: 
       {projects &&
         projects.map((project) => (
           <List.Item
-            key={project.id}
+            id={project.id}
             title={project.name}
             subtitle={project.framework ?? ""}
             keywords={[project.framework || ""]}
@@ -28,7 +28,7 @@ const ProjectList = ({ projects, username, selectedTeam: team, updateProject }: 
                   title="Open"
                   icon={Icon.ArrowRight}
                   onAction={async () => {
-                    const previous = await LocalStorage.getItem("recents");
+                    const previous = await LocalStorage.getItem<string>("recents");
                     const recents = previous ? JSON.parse(previous) : [];
                     await LocalStorage.setItem(
                       "recents",
@@ -50,7 +50,7 @@ const ProjectList = ({ projects, username, selectedTeam: team, updateProject }: 
               {
                 text:
                   project.latestDeployments?.length && project.latestDeployments[0].createdAt
-                    ? dayjs(project.latestDeployments[0].createdAt).fromNow()
+                    ? fromNow(project.latestDeployments[0].createdAt)
                     : "",
               },
             ]}

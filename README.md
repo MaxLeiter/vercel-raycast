@@ -21,5 +21,7 @@ This is a (heavily) modified fork of the [vercast](https://github.com/raycast/ex
 
 
 ## Screenshots:
-<img src="https://user-images.githubusercontent.com/8675906/148629875-01112e3c-ea92-4803-9b31-e6bcdbc5d467.jpg" width="600">
-<img src="https://user-images.githubusercontent.com/8675906/148629810-0ec86697-bec5-4472-a0b3-3ee5f0879baa.jpg" width="600">
+<img src="metadata/home.png" width="600">
+<img src="metadata/view-project.png" width="600">
+<img src="metadata/search-deployments.png" width="600">
+<img src="metadata/new-env-var.png" width="600">

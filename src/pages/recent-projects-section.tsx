@@ -40,7 +40,6 @@ const RecentProjectListSection = ({ projectAndTeamIds, teams, username, updatePr
 
           return (
             <List.Item
-              key={project.id}
               title={project.name || "No name"}
               actions={
                 <ActionPanel>
@@ -48,7 +47,7 @@ const RecentProjectListSection = ({ projectAndTeamIds, teams, username, updatePr
                     title="Open"
                     icon={Icon.ArrowRight}
                     onAction={async () => {
-                      const previous = await LocalStorage.getItem("recents");
+                      const previous = await LocalStorage.getItem<string>("recents");
                       const recents = previous ? JSON.parse(previous) : [];
                       await LocalStorage.setItem(
                         "recents",

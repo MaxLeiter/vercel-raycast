@@ -25,6 +25,7 @@ const NewEnvironmentVariable = ({ createEnvVar }: Props) => {
 
   return (
     <Form
+      navigationTitle="New Environment Variable"
       actions={
         <ActionPanel>
           <Action.SubmitForm title="Submit" onSubmit={onSubmit} />
@@ -37,8 +38,8 @@ const NewEnvironmentVariable = ({ createEnvVar }: Props) => {
         <Form.Dropdown.Item title="Secret" value="secret" icon={Icon.EyeSlash} />
       </Form.Dropdown>
       <Form.Separator />
-      <Form.TextField id="key" title="Environment variable key" />
-      <Form.TextField id="value" title="Environment variable value" />
+      <Form.TextField id="key" title="Environment variable key" placeholder="YOUR_KEY" />
+      <Form.TextField id="value" title="Environment variable value" placeholder="your_value" />
       <Form.Separator />
       <Form.Checkbox id="edit-form-production" label="Production" />
       <Form.Checkbox id="edit-form-preview" label="Preview" />
