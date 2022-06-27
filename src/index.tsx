@@ -9,7 +9,6 @@ import { Project, Team, User } from "./types";
 import UserListSection from "./pages/home/user-list-section";
 import SelectedTeamSection from "./pages/home/selected-team-section";
 
-
 function Main() {
   const token = String(getPreferenceValues().accountToken?.value);
   if (token.length !== 24) {
