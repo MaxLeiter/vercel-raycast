@@ -10,7 +10,7 @@ import UserListSection from "./pages/home/user-list-section";
 import SelectedTeamSection from "./pages/home/selected-team-section";
 
 function Main() {
-  const token = String(getPreferenceValues().accountToken?.value);
+  const token = String(getPreferenceValues().accessToken);
   if (token.length !== 24) {
     showToast({
       style: Toast.Style.Failure,

@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import type { Team, Deployment, Project, Environment, User, CreateEnvironmentVariableResponse, Build } from "./types";
 
-export const token = getPreferenceValues().accountToken?.value;
+export const token = getPreferenceValues().accessToken;
 const headers = new Headers({
   Authorization: "Bearer " + token,
 });

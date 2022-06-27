@@ -6,23 +6,25 @@
   "icon": "icon.png",
   "author": "MaxLeiter",
   "license": "MIT",
+  "access": "public",
   "commands": [
     {
       "name": "index",
       "title": "vc",
       "description": "Interact with the Vercel API",
       "mode": "view",
-      "subtitle": "Vercel",
-      "preferences": [
-        {
-          "name": "accountToken",
-          "type": "password",
-          "required": true,
-          "title": "Account Token",
-          "description": "Your Vercel account token",
-          "link": "https://vercel.com/account/tokens"
-        }
-      ]
+      "subtitle": "Vercel"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "accessToken",
+      "type": "password",
+      "required": true,
+      "title": "Access Token",
+      "description": "Your Vercel access token",
+      "placeholder": "Enter your Access Token",
+      "link": "https://vercel.com/account/tokens"
     }
   ],
   "dependencies": {
