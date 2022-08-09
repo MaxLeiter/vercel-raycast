@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "vercel-project-explorer",
+  "name": "vercast",
   "title": "Vercel Project Explorer",
   "description": "An extension for viewing and modifying Vercel projects and deployments.",
   "icon": "icon.png",

@@ -1,4 +1,4 @@
-# Vercel Project Explorer
+# Vercast
 Vercel for Raycast.
 
 Not affiliated with Vercel.

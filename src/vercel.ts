@@ -59,53 +59,6 @@ export async function fetchTeams(): Promise<Team[]> {
   return teams;
 }
 
-/*
- * Fetch all projects for the user and optional teams
- */
-export async function fetchProjects(username: User["username"], teams?: Team[]): Promise<Project[]> {
-  const projects: Project[] = [];
-  if (teams?.length) {
-    for (const team of teams) {
-      projects.push(...(await _rawFetchProjects(team)));
-    }
-  } else {
-    projects.push(...(await _rawFetchProjects()));
-  }
-  const projectsWithoutDuplicates = projects.filter(
-    (value, index, self) => index === self.findIndex((t) => t.id === value.id)
-  );
-
-  return projectsWithoutDuplicates.sort((a, b) => (a.updatedAt && b.updatedAt ? b.updatedAt - a.updatedAt : 0));
-}
-
-async function _rawFetchProjects(team?: Team, limit = 100): Promise<Project[]> {
-  try {
-    const projects: Project[] = [];
-    const query = new URLSearchParams({
-      teamId: team ? team.id : "",
-      limit: limit.toString(),
-    });
-
-    const response = await fetch(apiURL + `v8/projects?${query.toString()}`, {
-      method: "get",
-      headers: headers,
-    });
-    const json = (await response.json()) as { projects: Project[] };
-    for (const project of json.projects) {
-      projects.push(project);
-    }
-
-    return projects;
-  } catch (err) {
-    console.error(err);
-    showToast({
-      style: Toast.Style.Failure,
-      title: "Failed to fetch projects",
-    });
-    throw new Error("Failed to fetch projects");
-  }
-}
-
 export async function deleteProjectById(projectId: Project["id"], teamId?: Team["id"]) {
   try {
     const response = await fetch(apiURL + `v8/projects/${projectId}?teamId=${teamId ?? ""}`, {
