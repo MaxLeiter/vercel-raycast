@@ -22,6 +22,6 @@ The [Vercel REST API docs](https://vercel.com/docs/rest-api) and [Raycast develo
 This is a (heavily) modified fork of the [vercast](https://github.com/raycast/extensions/tree/main/extensions/vercast) extension.
 
 ## Screenshots:
-<img src="media/vercel-project-explorer-1.png" width="600">
-<img src="media/vercel-project-explorer-2.png" width="600">
-<img src="media/vercel-project-explorer-3.png" width="600">
+<img src="media/vercast-1.png" width="600">
+<img src="media/vercast-2.png" width="600">
+<img src="media/vercast-3.png" width="600">
