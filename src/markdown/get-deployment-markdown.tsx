@@ -20,19 +20,13 @@ const getDeploymentMarkdown = async (deployment: Deployment) => {
   // }
 
   const bold = (text: TemplateStringsArray | string) => `**${text}**`;
-  const italic = (text: TemplateStringsArray | string) => `*${text}*`;
+  // const italic = (text: TemplateStringsArray | string) => `*${text}*`;
 
   switch (state) {
     case "READY": {
       // @ts-expect-error Property 'id' does not exist on type 'Deployment'.
       const imageURL = await getScreenshotImageURL(deployment.uid || deployment.id);
 
-      if (deployment.meta.githubCommitAuthorName) {
-        intro += `Created by ` + italic(deployment.meta.githubCommitAuthorName);
-        if (deployment.meta.githubCommitRef) {
-          intro += " on " + italic(deployment.meta.githubCommitRef);
-        }
-      }
       body += `[![A screenshot of the deployment](${imageURL})](https://${deployment.url})`;
       break;
     }
